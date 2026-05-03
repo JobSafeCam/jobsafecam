@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1a1a1a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="JobSafeCam">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>JobSafeCam</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/icon.svg">
+  <script>
+    window.tailwind = {
+      theme: {
+        extend: {
+          colors: {
+            rugged: '#1a1a1a',
+            steel: '#262626',
+            asphalt: '#111111',
+            hazard: '#f97316',
+            signal: '#22c55e'
+          },
+          boxShadow: {
+            hazard: '0 0 0 3px rgba(249,115,22,.35)'
+          }
+        }
+      }
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { color-scheme: dark; --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px); }
+    body { background: #1a1a1a; min-height: 100dvh; overscroll-behavior: none; -webkit-tap-highlight-color: transparent; }
+    button, input, textarea { font: inherit; }
+    [hidden] { display: none !important; }
+    .high-vis-focus:focus-visible { outline: 4px solid #f97316; outline-offset: 4px; }
+    .hazard-stripe { background-image: repeating-linear-gradient(135deg, rgba(249,115,22,.95) 0 14px, rgba(17,17,17,.95) 14px 28px); }
+  </style>
+</head>
+<body class="text-zinc-100 antialiased">
+  <div class="min-h-dvh flex flex-col">
+    <header class="px-4 pt-[calc(var(--safe-top)+14px)] pb-3 border-b border-zinc-800 bg-asphalt/95">
+      <div class="mx-auto flex max-w-3xl items-center justify-between gap-3">
+        <button id="brandHome" class="high-vis-focus flex min-h-12 items-center gap-3 rounded-lg px-2 text-left" type="button">
+          <span class="flex h-11 w-11 items-center justify-center rounded-lg bg-hazard text-lg font-black text-black">JS</span>
+          <span>
+            <span class="block text-2xl font-black tracking-normal text-white">JobSafeCam</span>
+            <span id="pwaStatus" class="block text-xs font-bold uppercase tracking-normal text-zinc-400">PWA shell loading</span>
+          </span>
+        </button>
+        <div class="flex items-center gap-2">
+          <span id="authBadge" class="hidden rounded-lg border border-zinc-700 bg-zinc-950 px-3 py-2 text-xs font-black uppercase tracking-normal text-zinc-300 sm:inline-block">Signed Out</span>
+          <button id="headerSignOut" class="high-vis-focus hidden min-h-12 rounded-lg border-2 border-zinc-600 px-3 text-xs font-black uppercase tracking-normal text-zinc-100" type="button">Sign Out</button>
+          <button id="headerHistory" class="high-vis-focus min-h-12 rounded-lg border-2 border-zinc-600 px-4 text-sm font-black uppercase tracking-normal text-zinc-100 disabled:cursor-not-allowed disabled:opacity-40" type="button" disabled>History</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="mx-auto flex w-full max-w-3xl flex-1 flex-col px-4 pb-[calc(var(--safe-bottom)+16px)] pt-5">
+      <div id="appStatus" class="mb-4 rounded-lg border border-zinc-700 bg-steel px-4 py-3 text-sm font-bold text-zinc-200" role="status" aria-live="polite">Loading JobSafeCam.</div>
+
+      <section data-view="home" class="flex flex-1 flex-col justify-between gap-5">
+        <div class="space-y-4">
+          <div class="hazard-stripe h-4 rounded-lg" aria-hidden="true"></div>
+          <div class="rounded-lg border border-zinc-700 bg-steel p-4">
+            <p class="text-sm font-black uppercase tracking-normal text-hazard">Pre-work liability log</p>
+            <h1 class="mt-2 text-4xl font-black tracking-normal text-white md:text-6xl">Record the jobsite before work starts.</h1>
+          </div>
+          <div id="authPanel" class="rounded-lg border-2 border-zinc-700 bg-zinc-950 p-4">
+            <div id="authSignedOut" class="grid gap-4">
+              <div>
+                <p class="text-sm font-black uppercase tracking-normal text-hazard">Technician Access</p>
+                <h2 class="mt-1 text-2xl font-black uppercase tracking-normal text-white">Sign In Required</h2>
+              </div>
+              <form id="authForm" class="grid gap-3">
+                <label class="grid gap-2 text-sm font-black uppercase tracking-normal text-zinc-300">Email
+                  <input id="authEmail" class="high-vis-focus min-h-14 rounded-lg border-2 border-zinc-600 bg-asphalt px-4 text-lg font-bold text-white placeholder:text-zinc-500" name="email" type="email" autocomplete="email" placeholder="tech@company.com" required>
+                </label>
+                <label class="grid gap-2 text-sm font-black uppercase tracking-normal text-zinc-300">Password
+                  <input id="authPassword" class="high-vis-focus min-h-14 rounded-lg border-2 border-zinc-600 bg-asphalt px-4 text-lg font-bold text-white placeholder:text-zinc-500" name="password" type="password" autocomplete="current-password" placeholder="Minimum 6 characters" minlength="6" required>
+                </label>
+                <div class="grid gap-3 sm:grid-cols-2">
+                  <button class="high-vis-focus min-h-16 rounded-lg bg-hazard px-5 text-xl font-black uppercase tracking-normal text-black disabled:cursor-not-allowed disabled:opacity-40" type="submit" data-auth-action="sign-in">Sign In</button>
+                  <button class="high-vis-focus min-h-16 rounded-lg border-2 border-zinc-500 bg-zinc-900 px-5 text-xl font-black uppercase tracking-normal text-white disabled:cursor-not-allowed disabled:opacity-40" type="submit" data-auth-action="sign-up">Create Account</button>
+                </div>
+              </form>
+            </div>
+            <div id="authSignedIn" class="hidden items-center justify-between gap-3 sm:flex">
+              <div>
+                <p class="text-sm font-black uppercase tracking-normal text-hazard">Technician Signed In</p>
+                <p id="currentTechEmail" class="mt-1 break-all text-xl font-black tracking-normal text-white"></p>
+              </div>
+              <button id="homeSignOut" class="high-vis-focus min-h-14 rounded-lg border-2 border-zinc-500 px-5 text-sm font-black uppercase tracking-normal text-white" type="button">Sign Out</button>
+            </div>
+          </div>
+        </div>
+        <div class="grid gap-4">
+          <button id="newWalkthrough" class="high-vis-focus min-h-44 rounded-lg bg-hazard px-6 py-8 text-4xl font-black uppercase tracking-normal text-black shadow-hazard disabled:cursor-not-allowed disabled:opacity-40 md:min-h-56 md:text-6xl" type="button" disabled>New Site Walkthrough</button>
+          <button id="homeHistory" class="high-vis-focus min-h-20 rounded-lg border-2 border-zinc-500 bg-zinc-900 px-6 text-2xl font-black uppercase tracking-normal text-white disabled:cursor-not-allowed disabled:opacity-40" type="button" disabled>View History</button>
+        </div>
+      </section>
+
+      <section data-view="recording" hidden class="flex flex-1 flex-col gap-4">
+        <div class="flex items-center justify-between gap-3">
+          <button id="recordBack" class="high-vis-focus min-h-14 rounded-lg border-2 border-zinc-600 px-5 text-base font-black uppercase tracking-normal text-white" type="button">Back</button>
+          <div class="rounded-lg border border-zinc-600 bg-zinc-900 px-4 py-2 text-right"><span class="block text-xs font-black uppercase tracking-normal text-zinc-400">Timer</span><span id="recordingTimer" class="block text-3xl font-black tabular-nums tracking-normal text-white">00:00</span></div>
+        </div>
+        <div class="relative overflow-hidden rounded-lg border-2 border-zinc-700 bg-black">
+          <video id="cameraPreview" class="aspect-video w-full bg-black object-cover" autoplay muted playsinline></video>
+          <div id="recordingLamp" class="absolute left-3 top-3 hidden items-center gap-2 rounded-lg bg-red-600 px-3 py-2 text-sm font-black uppercase tracking-normal text-white"><span class="h-3 w-3 rounded-full bg-white"></span>Recording</div>
+        </div>
+        <div id="cameraFallback" class="hidden rounded-lg border-2 border-hazard bg-zinc-950 p-4">
+          <p class="mb-3 text-lg font-black text-white">Camera stream unavailable.</p>
+          <label class="high-vis-focus flex min-h-20 cursor-pointer items-center justify-center rounded-lg bg-hazard px-5 text-center text-2xl font-black uppercase tracking-normal text-black">Record With Camera App<input id="mobileCapture" class="sr-only" type="file" accept="video/*" capture="environment"></label>
+        </div>
+        <div class="grid gap-3 sm:grid-cols-2">
+          <button id="startRecording" class="high-vis-focus min-h-24 rounded-lg bg-signal px-5 text-3xl font-black uppercase tracking-normal text-black disabled:cursor-not-allowed disabled:opacity-40" type="button" disabled>Start Recording</button>
+          <button id="stopRecording" class="high-vis-focus min-h-24 rounded-lg bg-red-600 px-5 text-3xl font-black uppercase tracking-normal text-white disabled:cursor-not-allowed disabled:opacity-40" type="button" disabled>Stop</button>
+        </div>
+      </section>
+
+      <section data-view="details" hidden class="flex flex-1 flex-col gap-4">
+        <div class="flex items-center justify-between gap-3">
+          <button id="detailsBack" class="high-vis-focus min-h-14 rounded-lg border-2 border-zinc-600 px-5 text-base font-black uppercase tracking-normal text-white" type="button">Retake</button>
+          <div class="rounded-lg bg-hazard px-4 py-2 text-sm font-black uppercase tracking-normal text-black">Details</div>
+        </div>
+        <video id="recordedPreview" class="aspect-video w-full rounded-lg border-2 border-zinc-700 bg-black object-cover" controls playsinline></video>
+        <div class="grid gap-3 rounded-lg border border-zinc-700 bg-steel p-4 text-sm font-bold text-zinc-200 sm:grid-cols-3">
+          <div><span class="block text-xs uppercase tracking-normal text-zinc-400">Recorded</span><span id="recordedAtText" class="block text-white">Pending</span></div>
+          <div><span class="block text-xs uppercase tracking-normal text-zinc-400">GPS</span><span id="geoText" class="block text-white">Acquiring</span></div>
+          <div><span class="block text-xs uppercase tracking-normal text-zinc-400">Size</span><span id="videoSizeText" class="block text-white">Pending</span></div>
+        </div>
+        <form id="jobForm" class="grid gap-4">
+          <label class="grid gap-2 text-lg font-black uppercase tracking-normal text-zinc-200">Client Name<input id="clientName" class="high-vis-focus min-h-16 rounded-lg border-2 border-zinc-600 bg-zinc-950 px-4 text-xl font-bold text-white placeholder:text-zinc-500" name="clientName" autocomplete="organization" placeholder="Acme Facilities" required></label>
+          <label class="grid gap-2 text-lg font-black uppercase tracking-normal text-zinc-200">Job Address<input id="jobAddress" class="high-vis-focus min-h-16 rounded-lg border-2 border-zinc-600 bg-zinc-950 px-4 text-xl font-bold text-white placeholder:text-zinc-500" name="jobAddress" autocomplete="street-address" placeholder="1200 Industrial Way" required></label>
+          <label class="grid gap-2 text-lg font-black uppercase tracking-normal text-zinc-200">Notes<textarea id="notes" class="high-vis-focus min-h-32 rounded-lg border-2 border-zinc-600 bg-zinc-950 px-4 py-3 text-xl font-bold text-white placeholder:text-zinc-500" name="notes" placeholder="Visible conditions, access issues, existing damage"></textarea></label>
+          <div id="uploadPanel" class="hidden rounded-lg border border-zinc-700 bg-zinc-950 p-4"><div class="mb-2 flex items-center justify-between gap-3 text-sm font-black uppercase tracking-normal"><span id="uploadLabel" class="text-zinc-200">Preparing upload</span><span id="uploadPercent" class="text-hazard">0%</span></div><div class="h-5 overflow-hidden rounded-lg bg-zinc-800"><div id="uploadBar" class="h-full w-0 bg-hazard transition-all duration-200"></div></div></div>
+          <button id="uploadJob" class="high-vis-focus min-h-24 rounded-lg bg-hazard px-6 text-3xl font-black uppercase tracking-normal text-black shadow-hazard disabled:cursor-not-allowed disabled:opacity-40" type="submit">Upload Site Log</button>
+        </form>
+      </section>
+
+      <section data-view="success" hidden class="flex flex-1 flex-col items-center justify-center gap-6 text-center">
+        <div class="flex h-36 w-36 items-center justify-center rounded-lg border-4 border-signal bg-zinc-950"><svg class="h-24 w-24 text-signal" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+        <div><h2 class="text-5xl font-black uppercase tracking-normal text-white">Success!</h2><p class="mt-2 text-2xl font-black uppercase tracking-normal text-hazard">Site Logged</p></div>
+        <div class="grid w-full gap-3"><button id="successNew" class="high-vis-focus min-h-20 rounded-lg bg-hazard px-5 text-2xl font-black uppercase tracking-normal text-black" type="button">New Walkthrough</button><button id="successHistory" class="high-vis-focus min-h-20 rounded-lg border-2 border-zinc-500 bg-zinc-900 px-5 text-2xl font-black uppercase tracking-normal text-white" type="button">View History</button></div>
+      </section>
+
+      <section data-view="history" hidden class="flex flex-1 flex-col gap-4">
+        <div class="flex items-center justify-between gap-3"><button id="historyBack" class="high-vis-focus min-h-14 rounded-lg border-2 border-zinc-600 px-5 text-base font-black uppercase tracking-normal text-white" type="button">Home</button><button id="refreshHistory" class="high-vis-focus min-h-14 rounded-lg bg-hazard px-5 text-base font-black uppercase tracking-normal text-black" type="button">Refresh</button></div>
+        <h2 class="text-4xl font-black uppercase tracking-normal text-white">History</h2>
+        <div id="historyList" class="grid max-h-[calc(100dvh-260px)] gap-3 overflow-y-auto pr-1"></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="videoDialog" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 p-4"><div class="w-full max-w-3xl rounded-lg border border-zinc-700 bg-asphalt p-3"><video id="historyPlayer" class="aspect-video w-full rounded-lg bg-black object-contain" controls playsinline></video><button id="closePlayer" class="high-vis-focus mt-3 min-h-14 w-full rounded-lg bg-hazard px-5 text-xl font-black uppercase tracking-normal text-black" type="button">Close Player</button></div></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
