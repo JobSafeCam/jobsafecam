@@ -44,10 +44,12 @@
     <header class="px-4 pt-[calc(var(--safe-top)+14px)] pb-3 border-b border-zinc-800 bg-asphalt/95">
       <div class="mx-auto flex max-w-3xl items-center justify-between gap-3">
         <button id="brandHome" class="high-vis-focus flex min-h-12 items-center gap-3 rounded-lg px-2 text-left" type="button">
-          <span class="flex h-11 w-11 items-center justify-center rounded-lg border border-hazard bg-zinc-950 text-lg font-black text-hazard">JS</span>
+          <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-hazard/70 bg-black p-1.5">
+            <img src="/icon.svg" alt="" class="h-full w-full object-contain">
+          </span>
           <span>
             <span class="flex flex-wrap items-baseline gap-x-2 text-xl font-black tracking-normal text-white sm:text-2xl"><span>JobSafe<span class="text-hazard">Cam</span></span><span class="text-zinc-500">|</span><span class="text-sm font-bold text-zinc-200 sm:text-base">Records Department</span></span>
-            <span id="pwaStatus" class="block text-xs font-bold uppercase tracking-normal text-zinc-400">Evidence vault loading</span>
+            <span id="pwaStatus" class="sr-only">Evidence vault ready</span>
           </span>
         </button>
         <div class="flex items-center gap-2">
