@@ -1,7 +1,7 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
 const SUPABASE_URL = 'https://ttjtxmqojzxkpjiixjst.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR0anR4bXFvanp4a3BqaWl4anN0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4Mzk1MjMsImV4cCI6MjA5MzQxNTUyM30.EqHGGrEFcxnN_XOD9HiJZXrIChxvEk-jzXa6R3NROy0';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJIUzI1NiIsInJlZiI6InR0anR4bXFvanp4a3BqaWl4anN0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4Mzk1MjMsImV4cCI6MjA5MzQxNTUyM30.EqHGGrEFcxnN_XOD9HiJZXrIChxvEk-jzXa6R3NROy0';
 const STORAGE_BUCKET = 'job-videos';
 const JOB_LOGS_TABLE = 'job_logs';
 
@@ -109,6 +109,10 @@ function updateAuthUi() {
   authRequiredControls.forEach((control) => { control.disabled = !signedIn; });
 }
 
+function getAuthRedirectUrl() {
+  return window.location.protocol === 'file:' ? 'https://jobsafecam.com' : window.location.origin;
+}
+
 async function handleAuthSubmit(event) {
   event.preventDefault();
   const form = new FormData(event.currentTarget);
@@ -119,7 +123,13 @@ async function handleAuthSubmit(event) {
   setAuthBusy(true);
   try {
     if (action === 'sign-up') {
-      const { data, error } = await supabase.auth.signUp({ email, password });
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: getAuthRedirectUrl()
+        }
+      });
       if (error) throw error;
       if (data.session) applyAuthSession(data.session);
       setStatus(data.session ? 'Account created. You are signed in.' : 'Account created. Check your email if confirmation is required.', 'ok');
@@ -259,7 +269,8 @@ async function uploadJob(event) {
   event.preventDefault();
   if (!requireSignedIn('Sign in before uploading a job log.')) return;
   if (!state.recordedBlob) return setStatus('Record a video before uploading.', 'error');
-  const form = new FormData(event.currentTarget);
+  const jobFormElement = event.currentTarget;
+  const form = new FormData(jobFormElement);
   const clientName = String(form.get('clientName') || '').trim();
   const address = String(form.get('jobAddress') || '').trim();
   const notes = String(form.get('notes') || '').trim();
@@ -286,7 +297,7 @@ async function uploadJob(event) {
     if (error) throw error;
     setUploadProgress(100, 'Upload complete');
     setStatus('Success. Site log uploaded with video, GPS, and timestamp metadata.', 'ok');
-    event.currentTarget.reset();
+    jobFormElement.reset();
     showView('success');
   } catch (error) {
     console.error(error);
