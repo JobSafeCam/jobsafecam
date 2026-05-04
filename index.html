@@ -44,29 +44,30 @@
     <header class="px-4 pt-[calc(var(--safe-top)+14px)] pb-3 border-b border-zinc-800 bg-asphalt/95">
       <div class="mx-auto flex max-w-3xl items-center justify-between gap-3">
         <button id="brandHome" class="high-vis-focus flex min-h-12 items-center gap-3 rounded-lg px-2 text-left" type="button">
-          <span class="flex h-11 w-11 items-center justify-center rounded-lg bg-hazard text-lg font-black text-black">JS</span>
+          <span class="flex h-11 w-11 items-center justify-center rounded-lg border border-hazard bg-zinc-950 text-lg font-black text-hazard">JS</span>
           <span>
-            <span class="block text-2xl font-black tracking-normal text-white">JobSafeCam</span>
-            <span id="pwaStatus" class="block text-xs font-bold uppercase tracking-normal text-zinc-400">PWA shell loading</span>
+            <span class="flex flex-wrap items-baseline gap-x-2 text-xl font-black tracking-normal text-white sm:text-2xl"><span>JobSafe<span class="text-hazard">Cam</span></span><span class="text-zinc-500">|</span><span class="text-sm font-bold text-zinc-200 sm:text-base">Records Department</span></span>
+            <span id="pwaStatus" class="block text-xs font-bold uppercase tracking-normal text-zinc-400">Evidence vault loading</span>
           </span>
         </button>
         <div class="flex items-center gap-2">
           <span id="authBadge" class="hidden rounded-lg border border-zinc-700 bg-zinc-950 px-3 py-2 text-xs font-black uppercase tracking-normal text-zinc-300 sm:inline-block">Signed Out</span>
           <button id="headerSignOut" class="high-vis-focus hidden min-h-12 rounded-lg border-2 border-zinc-600 px-3 text-xs font-black uppercase tracking-normal text-zinc-100" type="button">Sign Out</button>
-          <button id="headerHistory" class="high-vis-focus min-h-12 rounded-lg border-2 border-zinc-600 px-4 text-sm font-black uppercase tracking-normal text-zinc-100 disabled:cursor-not-allowed disabled:opacity-40" type="button" disabled>History</button>
+          <button id="headerHistory" class="high-vis-focus min-h-12 rounded-lg border-2 border-zinc-600 px-4 text-sm font-black uppercase tracking-normal text-zinc-100 disabled:cursor-not-allowed disabled:opacity-40" type="button" disabled>Vault</button>
         </div>
       </div>
     </header>
 
     <main class="mx-auto flex w-full max-w-3xl flex-1 flex-col px-4 pb-[calc(var(--safe-bottom)+16px)] pt-5">
-      <div id="appStatus" class="mb-4 rounded-lg border border-zinc-700 bg-steel px-4 py-3 text-sm font-bold text-zinc-200" role="status" aria-live="polite">Loading JobSafeCam.</div>
+      <div id="appStatus" class="mb-4 rounded-lg border border-zinc-700 bg-steel px-4 py-3 text-sm font-bold text-zinc-200" role="status" aria-live="polite">Loading JobSafeCam Records Department.</div>
 
       <section data-view="home" class="flex flex-1 flex-col justify-between gap-5">
         <div class="space-y-4">
           <div class="hazard-stripe h-4 rounded-lg" aria-hidden="true"></div>
-          <div class="rounded-lg border border-zinc-700 bg-steel p-4">
-            <p class="text-sm font-black uppercase tracking-normal text-hazard">Pre-work liability log</p>
-            <h1 class="mt-2 text-4xl font-black tracking-normal text-white md:text-6xl">Record the jobsite before work starts.</h1>
+          <div class="rounded-lg border border-zinc-700 bg-steel p-4 shadow-lg shadow-black/20">
+            <p class="text-sm font-black uppercase tracking-normal text-hazard">Records Department</p>
+            <h1 class="mt-2 text-4xl font-black tracking-normal text-white md:text-6xl">New Site Walkthrough</h1>
+            <p class="mt-2 text-base font-bold text-zinc-300">Capture pre-work evidence with video, GPS, timestamp, and site notes.</p>
           </div>
           <div id="authPanel" class="rounded-lg border-2 border-zinc-700 bg-zinc-950 p-4">
             <div id="authSignedOut" class="grid gap-4">
@@ -96,9 +97,18 @@
             </div>
           </div>
         </div>
-        <div class="grid gap-4">
-          <button id="newWalkthrough" class="high-vis-focus min-h-44 rounded-lg bg-hazard px-6 py-8 text-4xl font-black uppercase tracking-normal text-black shadow-hazard disabled:cursor-not-allowed disabled:opacity-40 md:min-h-56 md:text-6xl" type="button" disabled>New Site Walkthrough</button>
-          <button id="homeHistory" class="high-vis-focus min-h-20 rounded-lg border-2 border-zinc-500 bg-zinc-900 px-6 text-2xl font-black uppercase tracking-normal text-white disabled:cursor-not-allowed disabled:opacity-40" type="button" disabled>View History</button>
+        <div class="grid gap-3">
+          <div class="grid gap-3 sm:grid-cols-2">
+            <button id="newWalkthrough" class="high-vis-focus flex min-h-40 flex-col items-center justify-center gap-4 rounded-lg border-2 border-hazard bg-zinc-950 px-5 py-6 text-center text-2xl font-black uppercase tracking-normal text-white shadow-hazard disabled:cursor-not-allowed disabled:opacity-40" type="button" disabled>
+              <svg class="h-14 w-14 text-white" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5h6A2.5 2.5 0 0 1 15 7.5v9A2.5 2.5 0 0 1 12.5 19h-6A2.5 2.5 0 0 1 4 16.5v-9Z" fill="currentColor"></path><path d="m16 10 4-2.5v9L16 14v-4Z" fill="currentColor"></path></svg>
+              <span>Record Pre-Work Video</span>
+            </button>
+            <button id="siteNotesShortcut" class="high-vis-focus flex min-h-40 flex-col items-center justify-center gap-4 rounded-lg bg-hazard px-5 py-6 text-center text-2xl font-black uppercase tracking-normal text-black shadow-hazard disabled:cursor-not-allowed disabled:opacity-40" type="button" disabled>
+              <svg class="h-14 w-14 text-black" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 4h8l1 2h2a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h2l1-2Z" fill="currentColor" opacity=".25"></path><path d="M9 4h6v4H9V4Zm-1 8h8v2H8v-2Zm0 4h8v2H8v-2Z" fill="currentColor"></path></svg>
+              <span>Add Site Notes</span>
+            </button>
+          </div>
+          <button id="homeHistory" class="high-vis-focus flex min-h-20 items-center justify-center gap-3 rounded-lg border-2 border-zinc-600 bg-zinc-800 px-6 text-2xl font-black uppercase tracking-normal text-white disabled:cursor-not-allowed disabled:opacity-40" type="button" disabled><svg class="h-7 w-7 text-hazard" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 10V8a5 5 0 0 1 10 0v2h1a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h1Zm2 0h6V8a3 3 0 0 0-6 0v2Z" fill="currentColor"></path></svg> View History Vault</button>
         </div>
       </section>
 
@@ -124,7 +134,7 @@
       <section data-view="details" hidden class="flex flex-1 flex-col gap-4">
         <div class="flex items-center justify-between gap-3">
           <button id="detailsBack" class="high-vis-focus min-h-14 rounded-lg border-2 border-zinc-600 px-5 text-base font-black uppercase tracking-normal text-white" type="button">Retake</button>
-          <div class="rounded-lg bg-hazard px-4 py-2 text-sm font-black uppercase tracking-normal text-black">Details</div>
+          <div class="rounded-lg bg-hazard px-4 py-2 text-sm font-black uppercase tracking-normal text-black">Evidence Details</div>
         </div>
         <video id="recordedPreview" class="aspect-video w-full rounded-lg border-2 border-zinc-700 bg-black object-cover" controls playsinline></video>
         <div class="grid gap-3 rounded-lg border border-zinc-700 bg-steel p-4 text-sm font-bold text-zinc-200 sm:grid-cols-3">
@@ -135,22 +145,22 @@
         <form id="jobForm" class="grid gap-4">
           <label class="grid gap-2 text-lg font-black uppercase tracking-normal text-zinc-200">Client Name<input id="clientName" class="high-vis-focus min-h-16 rounded-lg border-2 border-zinc-600 bg-zinc-950 px-4 text-xl font-bold text-white placeholder:text-zinc-500" name="clientName" autocomplete="organization" placeholder="Acme Facilities" required></label>
           <label class="grid gap-2 text-lg font-black uppercase tracking-normal text-zinc-200">Job Address<input id="jobAddress" class="high-vis-focus min-h-16 rounded-lg border-2 border-zinc-600 bg-zinc-950 px-4 text-xl font-bold text-white placeholder:text-zinc-500" name="jobAddress" autocomplete="street-address" placeholder="1200 Industrial Way" required></label>
-          <label class="grid gap-2 text-lg font-black uppercase tracking-normal text-zinc-200">Notes<textarea id="notes" class="high-vis-focus min-h-32 rounded-lg border-2 border-zinc-600 bg-zinc-950 px-4 py-3 text-xl font-bold text-white placeholder:text-zinc-500" name="notes" placeholder="Visible conditions, access issues, existing damage"></textarea></label>
-          <div id="uploadPanel" class="hidden rounded-lg border border-zinc-700 bg-zinc-950 p-4"><div class="mb-2 flex items-center justify-between gap-3 text-sm font-black uppercase tracking-normal"><span id="uploadLabel" class="text-zinc-200">Preparing upload</span><span id="uploadPercent" class="text-hazard">0%</span></div><div class="h-5 overflow-hidden rounded-lg bg-zinc-800"><div id="uploadBar" class="h-full w-0 bg-hazard transition-all duration-200"></div></div></div>
-          <button id="uploadJob" class="high-vis-focus min-h-24 rounded-lg bg-hazard px-6 text-3xl font-black uppercase tracking-normal text-black shadow-hazard disabled:cursor-not-allowed disabled:opacity-40" type="submit">Upload Site Log</button>
+          <label class="grid gap-2 text-lg font-black uppercase tracking-normal text-zinc-200">Site Notes<textarea id="notes" class="high-vis-focus min-h-32 rounded-lg border-2 border-zinc-600 bg-zinc-950 px-4 py-3 text-xl font-bold text-white placeholder:text-zinc-500" name="notes" placeholder="Visible conditions, access issues, existing damage"></textarea></label>
+          <div id="uploadPanel" class="hidden rounded-lg border border-zinc-700 bg-zinc-950 p-4"><div class="mb-2 flex items-center justify-between gap-3 text-sm font-black uppercase tracking-normal"><span id="uploadLabel" class="text-zinc-200">Preparing vault submission</span><span id="uploadPercent" class="text-hazard">0%</span></div><div class="h-5 overflow-hidden rounded-lg bg-zinc-800"><div id="uploadBar" class="h-full w-0 bg-hazard transition-all duration-200"></div></div></div>
+          <button id="uploadJob" class="high-vis-focus min-h-24 rounded-lg bg-hazard px-6 text-3xl font-black uppercase tracking-normal text-black shadow-hazard disabled:cursor-not-allowed disabled:opacity-40" type="submit">Submit to Vault</button>
         </form>
       </section>
 
       <section data-view="success" hidden class="flex flex-1 flex-col items-center justify-center gap-6 text-center">
         <div class="flex h-36 w-36 items-center justify-center rounded-lg border-4 border-signal bg-zinc-950"><svg class="h-24 w-24 text-signal" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
-        <div><h2 class="text-5xl font-black uppercase tracking-normal text-white">Success!</h2><p class="mt-2 text-2xl font-black uppercase tracking-normal text-hazard">Site Logged</p></div>
-        <div class="grid w-full gap-3"><button id="successNew" class="high-vis-focus min-h-20 rounded-lg bg-hazard px-5 text-2xl font-black uppercase tracking-normal text-black" type="button">New Walkthrough</button><button id="successHistory" class="high-vis-focus min-h-20 rounded-lg border-2 border-zinc-500 bg-zinc-900 px-5 text-2xl font-black uppercase tracking-normal text-white" type="button">View History</button></div>
+        <div><h2 class="text-5xl font-black uppercase tracking-normal text-white">Success!</h2><p class="mt-2 text-2xl font-black uppercase tracking-normal text-hazard">Submitted to Vault</p></div>
+        <div class="grid w-full gap-3"><button id="successNew" class="high-vis-focus min-h-20 rounded-lg bg-hazard px-5 text-2xl font-black uppercase tracking-normal text-black" type="button">New Walkthrough</button><button id="successHistory" class="high-vis-focus min-h-20 rounded-lg border-2 border-zinc-500 bg-zinc-900 px-5 text-2xl font-black uppercase tracking-normal text-white" type="button">Open History Vault</button></div>
       </section>
 
       <section data-view="history" hidden class="flex flex-1 flex-col gap-4">
         <div class="flex items-center justify-between gap-3"><button id="historyBack" class="high-vis-focus min-h-14 rounded-lg border-2 border-zinc-600 px-5 text-base font-black uppercase tracking-normal text-white" type="button">Home</button><button id="refreshHistory" class="high-vis-focus min-h-14 rounded-lg bg-hazard px-5 text-base font-black uppercase tracking-normal text-black" type="button">Refresh</button></div>
         <div class="flex items-end justify-between gap-3">
-          <h2 class="text-4xl font-black uppercase tracking-normal text-white">History</h2>
+          <h2 class="text-4xl font-black uppercase tracking-normal text-white">History Vault</h2>
           <span id="historyCount" class="rounded-lg border border-zinc-700 bg-zinc-950 px-3 py-2 text-xs font-black uppercase tracking-normal text-zinc-300">0 Logs</span>
         </div>
         <div id="historyList" class="grid max-h-[calc(100dvh-285px)] gap-3 overflow-y-auto pr-1"></div>
@@ -163,7 +173,7 @@
       <div class="flex items-center justify-between gap-3 border-b border-zinc-800 bg-zinc-950 px-4 pb-3 pt-[calc(var(--safe-top)+12px)] sm:pt-3">
         <div>
           <p class="text-xs font-black uppercase tracking-normal text-hazard">Playback</p>
-          <h2 id="videoDialogTitle" class="text-2xl font-black uppercase tracking-normal text-white">Site Walkthrough</h2>
+          <h2 id="videoDialogTitle" class="text-2xl font-black uppercase tracking-normal text-white">Vault Playback</h2>
         </div>
         <button id="closePlayerTop" class="high-vis-focus min-h-14 rounded-lg bg-hazard px-5 text-base font-black uppercase tracking-normal text-black" type="button">Close</button>
       </div>
@@ -217,9 +227,29 @@
           const updateHistoryCount = () => {
             const count = historyList.querySelectorAll('article').length;
             historyCount.textContent = `${count} ${count === 1 ? 'Log' : 'Logs'}`;
+            historyList.querySelectorAll('button').forEach((button) => {
+              if (button.textContent.trim() === 'Play Video') button.textContent = 'Open Vault Video';
+            });
           };
           new MutationObserver(updateHistoryCount).observe(historyList, { childList: true });
           updateHistoryCount();
+        }
+
+        const recordButton = document.getElementById('newWalkthrough');
+        const notesButton = document.getElementById('siteNotesShortcut');
+        const appStatus = document.getElementById('appStatus');
+        if (recordButton && notesButton) {
+          const syncNotesButton = () => {
+            notesButton.disabled = recordButton.disabled;
+          };
+          new MutationObserver(syncNotesButton).observe(recordButton, { attributes: true, attributeFilter: ['disabled'] });
+          syncNotesButton();
+          notesButton.addEventListener('click', () => {
+            if (appStatus) {
+              appStatus.textContent = 'Site notes attach to a recorded walkthrough. Record first, then submit notes to the vault.';
+            }
+            recordButton.click();
+          });
         }
       };
 
