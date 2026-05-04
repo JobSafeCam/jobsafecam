@@ -1,7 +1,7 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
 const SUPABASE_URL = 'https://ttjtxmqojzxkpjiixjst.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJIUzI1NiIsInJlZiI6InR0anR4bXFvanp4a3BqaWl4anN0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4Mzk1MjMsImV4cCI6MjA5MzQxNTUyM30.EqHGGrEFcxnN_XOD9HiJZXrIChxvEk-jzXa6R3NROy0';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR0anR4bXFvanp4a3BqaWl4anN0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4Mzk1MjMsImV4cCI6MjA5MzQxNTUyM30.EqHGGrEFcxnN_XOD9HiJZXrIChxvEk-jzXa6R3NROy0';
 const STORAGE_BUCKET = 'job-videos';
 const JOB_LOGS_TABLE = 'job_logs';
 
