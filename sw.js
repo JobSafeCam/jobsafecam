@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jobsafecam-v4';
+const CACHE_NAME = 'jobsafecam-v5';
 const CORE_ASSETS = ['/', '/index.html', '/app.js', '/manifest.webmanifest', '/icon.svg'];
 const NETWORK_FIRST_PATHS = new Set(['/', '/index.html', '/app.js']);
 
