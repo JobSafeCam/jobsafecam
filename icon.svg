@@ -1,7 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="56" fill="#1a1a1a"/>
-  <rect x="54" y="86" width="404" height="300" rx="32" fill="#f97316"/>
-  <circle cx="256" cy="236" r="86" fill="#111111"/>
-  <circle cx="256" cy="236" r="48" fill="#f97316"/>
-  <path d="M94 424h324" stroke="#f97316" stroke-width="42" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title>JobSafeCam</title>
+  <defs>
+    <linearGradient id="orange" x1="118" y1="148" x2="398" y2="356" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ff9a24"/>
+      <stop offset="1" stop-color="#f97316"/>
+    </linearGradient>
+    <linearGradient id="steel" x1="106" y1="72" x2="386" y2="438" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3a3a37"/>
+      <stop offset="1" stop-color="#161616"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="76" fill="#050505"/>
+  <path d="M256 46c52 36 112 58 180 64v96c0 118-70 214-180 260C146 420 76 324 76 206v-96c68-6 128-28 180-64Z" fill="url(#steel)" stroke="#f5f5f4" stroke-width="10"/>
+  <path d="M256 82c42 27 88 45 142 53v66l-54 31c-18-67-76-113-145-113-31 0-60 9-85 25v-9c54-8 100-26 142-53Z" fill="#101010"/>
+  <path d="M199 142c66 0 122 46 137 108h43c16 0 29 13 29 29v58c0 16-13 26-27 18l-56-32c-27 40-73 66-126 66-84 0-152-68-152-152s68-95 152-95Z" fill="url(#orange)"/>
+  <path d="M130 162h75l34 72h-84l-39-57c4-6 9-11 14-15Zm129-16 43 76-52 29-43-91c16-8 33-13 52-14Zm84 113v72l-87-1 41-71h46ZM202 363l-49-65h88l31 67c-22 4-46 3-70-2Zm-76-86-34 57c-14-23-21-50-20-78l37-61 42 61-25 21Z" fill="#111111"/>
+  <circle cx="237" cy="256" r="48" fill="#111111"/>
+  <circle cx="252" cy="238" r="18" fill="#f97316"/>
+  <path d="M262 95v321" stroke="#f5f5f4" stroke-width="12" stroke-linecap="round" opacity=".9"/>
 </svg>
